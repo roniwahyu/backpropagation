@@ -1,6 +1,10 @@
 import java.lang.Math;
 /* Public class to represent a node! */
 
+// Hello this is a test for git!
+
+// and another test
+
 public class Neuron {
   // Each Neuron has a theta value associated with it.
   private float theta;
