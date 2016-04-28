@@ -86,6 +86,22 @@ public class Test {
     // calculate Y for every hidden neuron
     for (int i = 0; i < numOfHiddenLayers; i++) {
       for (int j = 0; j < numOfHiddenNeurons; j++) {
+        // if first hidden layer
+          // for each neuron in this hidden layer
+            // receive each input neuron
+              // input neuron will have the INPUT and the WEIGHT corresponding to this current hidden neuron
+            // calculate the activiation function for this current neuron
+            // save result this neuron
+          // end loop
+        // end if
+        // else (if not first hidden layer)
+          // for each neuron in this hidden layer
+            // recieve each neuron in previous hidden layer
+              // incoming neuron will have the YVALUE and the WEIGHT corresponding to this current hidden neuron
+            // calculate the activation function for this current neuron
+          // save the result to this neuron
+        // end loop
+      // end else
         hiddenNeurons[i][j].setYvalue(hiddenNeurons[i][j].calculateY(iteration));
       } // end for
     }// end for
