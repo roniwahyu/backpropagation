@@ -49,8 +49,14 @@ public class Test {
       outputNeurons[i] = new Neuron(numOfHiddenNeurons);
     }
 
+    // this is simulating the first iteration
+    // therefore:
+    int iteration = 1;
+
     // initializes the Neurons to match our assignment.
-    inputNeurons[0].setSynapseOut(0, 05.f);
+    // actually the weights and thresholds (?) need to be random.
+    // i will make them random after I am positive each calculation is correct.
+    inputNeurons[0].setSynapseOut(0, 0.5f);
     inputNeurons[0].setSynapseOut(1, 0.9f); // Neuron 1 created.
 
     inputNeurons[1].setSynapseOut(0, 0.4f);
@@ -80,18 +86,18 @@ public class Test {
     // calculate Y for every hidden neuron
     for (int i = 0; i < numOfHiddenLayers; i++) {
       for (int j = 0; j < numOfHiddenNeurons; j++) {
-        hiddenNeurons[i][j].setYvalue(hiddenNeurons[i][j].calculateY(1));
+        hiddenNeurons[i][j].setYvalue(hiddenNeurons[i][j].calculateY(iteration));
       } // end for
     }// end for
 
     // calculate Y for every output neuron
     for (int i = 0; i < numOfOutputNeurons; i++) {
-      outputNeurons[i].setYvalue(outputNeurons[i].calculateY(1));
+      outputNeurons[i].setYvalue(outputNeurons[i].calculateY(iteration));
     }// end for
 
     // calculate error for the output neurons
     // lol okay.
-    
+
 
 
     System.out.println("***********************************************"); // just for viewing in console easier

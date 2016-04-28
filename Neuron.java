@@ -40,7 +40,6 @@ public class Neuron {
     for (int i = 0; i < synapseIn.length; i++) { // adding up (x)(w1) + (x)(w2) ... etc
       x += (1) * synapseIn[i];
     } // end for
-
     x = x - ((1) * theta); // subtracting theta
     x = sigmoid(x); // pass this to sigmoid
     return x;
@@ -48,6 +47,20 @@ public class Neuron {
   public void setYvalue(double y) {
     yvalue = y; //-------------------------------maybe just make this ^^^^^^^^
   }
+
+  // calculate the error for neurons in output layer
+  public double calcOutputError(int iteration) {
+    // hello
+    int desire;
+    switch (iteration) {
+      case 1: desire = 0;
+      case 2: desire = 1;
+      case 3: desire = 1;
+      case 4: desire = 0;
+      default: desire = 100; // just because it'll fuck with your head so bad
+    } //end switch
+    return (desire - yvalue);
+  } //end calcOutputError()
 
   // simple toString for ya
   public String toString() {

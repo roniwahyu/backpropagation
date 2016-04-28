@@ -1,4 +1,5 @@
 # no .class files
 *.class
 
-#poopj
+# no scratch file
+scratch.java
