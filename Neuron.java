@@ -37,7 +37,7 @@ public class Neuron {
   } // end helper
   public double calculateY(int iteration) { // NOTE THIS NOT FINISHED THIS IS ONLY FOR A SAMPLE ITERATION
     double x = 0;
-    for (int i = 0; i < synapseIn.length; i++) { // adding up (x)(w1) + (x)(w2) ... etc
+    for (int i = 0; i < synapseIn.length; i++) { // adding up (x)(w1) + (x)(w2) ... etc    
       x += (1) * synapseIn[i];
     } // end for
     x = x - ((1) * theta); // subtracting theta
