@@ -1,5 +1,2 @@
 # no .class files
 *.class
-
-# no scratch file
-scratch.java
