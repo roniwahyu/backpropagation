@@ -24,6 +24,10 @@ public class Test {
       return -1.2 + (1.2 - -1.2) * r.nextDouble();
     }
 
+    public static double randomTheta(Random r) {
+      return -1 + (1 - -1) * r.nextDouble();
+    }
+
   public static void main(String[] args) {
 
     // information for building network
@@ -65,7 +69,8 @@ public class Test {
     // make random weights
 
     Random r = new Random();
-    System.out.println(randomWeight(r)); // debug test
+    System.out.println("Random weight: " + randomWeight(r)); // debug test
+    System.out.println("Random theta: " + randomTheta(r));
 
     inputNeurons[0].setSynapseOut(0, randomWeight(r));
     inputNeurons[0].setSynapseOut(1, randomWeight(r)); // Neuron 1 created.
@@ -75,23 +80,23 @@ public class Test {
 
     hiddenNeurons[0][0].setSynapseIn(0, randomWeight(r));
     hiddenNeurons[0][0].setSynapseIn(1, randomWeight(r));
-    hiddenNeurons[0][0].setTheta(0.8f); // Neuron 3 created.
+    hiddenNeurons[0][0].setTheta(randomTheta(r)); // Neuron 3 created.
 
     hiddenNeurons[0][1].setSynapseIn(0, randomWeight(r));
     hiddenNeurons[0][1].setSynapseIn(1, randomWeight(r));
-    hiddenNeurons[0][1].setTheta(-0.1f); // Neuron 4 created.
+    hiddenNeurons[0][1].setTheta(randomTheta(r)); // Neuron 4 created.
 
     hiddenNeurons[1][0].setSynapseIn(0, randomWeight(r));
     hiddenNeurons[1][0].setSynapseIn(1, randomWeight(r));
-    hiddenNeurons[1][0].setTheta(-0.6f); // Neuron 5 created.
+    hiddenNeurons[1][0].setTheta(randomTheta(r)); // Neuron 5 created.
 
     hiddenNeurons[1][1].setSynapseIn(0, randomWeight(r));
     hiddenNeurons[1][1].setSynapseIn(1, randomWeight(r));
-    hiddenNeurons[1][1].setTheta(-1.0f); // Neuron 6 created
+    hiddenNeurons[1][1].setTheta(randomTheta(r)); // Neuron 6 created
 
     outputNeurons[0].setSynapseIn(0, randomWeight(r));
     outputNeurons[0].setSynapseIn(1, randomWeight(r));
-    outputNeurons[0].setTheta(0.3f); // Neuron 7 created.
+    outputNeurons[0].setTheta(randomTheta(r)); // Neuron 7 created.
 
 
     // calculate Y for every hidden neuron
