@@ -144,19 +144,42 @@ public class Test {
       default:
         System.out.println("error looping through iterations");
     }
+
+    // first hidden layer
+    
+    // current input for current iteration
+    double input1 = inputNeurons[0].getYvalue(); // initial input from table
+    double input2 = inputNeurons[1].getYvalue(); // inititial input from table
+    // for first neuron in hidden
+    double w00 = inputNeurons[0].getSynapseOut(0); // input1's weight to this neuron
+    double w10 = inputNeurons[1].getSynapseOut(0); // input2's weight to this neuron
+
+    hiddenNeuron[i][j].calculateY(input1, w00, input2, w01, hiddenNeuron[i][j].getTheta());
+
+    // for second neuron in hidden
+    double w01 = inputNeurons[0].getSynapseOut(1); // input1's weight to this neuron
+    double w11 = inputNeurons[1].getSynapseOut(1); // input2's weight to this neuron
+
+
+    /*
     // calculate Y for every hidden neuron
     for (int i = 0; i < numOfHiddenLayers; i++) {
       for (int j = 0; j < numOfHiddenNeurons; j++) {
         // if first hidden layer
         if (i == 0) {
-          double input1 = inputNeurons[0].getYvalue();
-          double input2 = inputNeurons[1].getYvalue();
-          double w00 = inputNeurons[0].getSynapseOut(0);
-          double w01 = inputNeurons[1].getSynapseOut(0);
-          double w10 = inputNeurons[0].getSynapseOut(1);
-          double w11 = inputNeurons[1].getSynapseOut(1);
-          
-        }
+          // current input for current iteration
+          double input1 = inputNeurons[0].getYvalue(); // initial input from table
+          double input2 = inputNeurons[1].getYvalue(); // inititial input from table
+        } // end if
+          // for first neuron in hidden
+          double w00 = inputNeurons[0].getSynapseOut(0); // input1's weight to this neuron
+          double w10 = inputNeurons[1].getSynapseOut(0); // input2's weight to this neuron
+
+          hiddenNeuron[i][j].calculateY(input1, w00, input2, w01, hiddenNeuron[i][j].getTheta());
+
+          // for second neuron in hidden
+          double w01 = inputNeurons[0].getSynapseOut(1); // input1's weight to this neuron
+          double w11 = inputNeurons[1].getSynapseOut(1); // input2's weight to this neuron
           // for each neuron in this hidden layer
             // receive each input neuron
               // input neuron will have the INPUT and the WEIGHT corresponding to this current hidden neuron
@@ -172,13 +195,13 @@ public class Test {
           // save the result to this neuron
         // end loop
       // end else
-        hiddenNeurons[i][j].setYvalue(hiddenNeurons[i][j].calculateY(iteration));
+        //hiddenNeurons[i][j].setYvalue(hiddenNeurons[i][j].calculateY(iteration));
       } // end for
-    }// end for
+    }// end for */
 
     // calculate Y for every output neuron
     for (int i = 0; i < numOfOutputNeurons; i++) {
-      outputNeurons[i].setYvalue(outputNeurons[i].calculateY(iteration));
+      //outputNeurons[i].setYvalue(outputNeurons[i].calculateY(iteration));
     }// end for
 
     // calculate error for the output neurons
