@@ -58,37 +58,19 @@ public class Test {
       outputNeurons[i] = new Neuron(numOfHiddenNeurons);
     }
 
-    // this is simulating the first iteration
-    // therefore:
-    int iteration = 1;
-    /*
-    inputs    output
-    1   1     0
-    1   0     1
-    0   1     1
-    0   0     0
-    */
-
-    // initializes the Neurons to match our assignment.
-    // actually the weights and thresholds (?) need to be random.
-    // i will make them random after I am positive each calculation is correct
-
     // make random weights and thetas
     Random r = new Random();
-    System.out.println("Random weight: " + randomWeight(r)); // debug test
-    System.out.println("Random theta: " + randomTheta(r));
-
-
-
+    System.out.println("DEBUG: Random weight: " + randomWeight(r)); // debug test
+    System.out.println("DEBUG: Random theta: " + randomTheta(r));
 
     // setting up the first iteration
     inputNeurons[0].setSynapseOut(0, randomWeight(r));
     inputNeurons[0].setSynapseOut(1, randomWeight(r));
-    inputNeurons[0].setYvalue(1); // Neuron 1 created.
+     // Neuron 1 created.
 
     inputNeurons[1].setSynapseOut(0, randomWeight(r));
     inputNeurons[1].setSynapseOut(1, randomWeight(r));
-    inputNeurons[1].setYvalue(1); // Neuron 2 created
+     // Neuron 2 created
 
     hiddenNeurons[0][0].setSynapseIn(0, randomWeight(r));
     hiddenNeurons[0][0].setSynapseIn(1, randomWeight(r));
@@ -110,7 +92,40 @@ public class Test {
     outputNeurons[0].setSynapseIn(1, randomWeight(r));
     outputNeurons[0].setTheta(randomTheta(r)); // Neuron 7 created.
 
-
+    // now setting up iterations
+    int iteration = 1;
+    switch (iteration) {
+      case 1:
+        /*
+        inputs    output
+        1   1     0
+        */
+        inputNeurons[0].setYvalue(1);
+        inputNeurons[1].setYvalue(1);
+        break;
+      case 2:
+        /*
+        inputs    output
+        1   0     1
+        */
+        inputNeurons[0].setYvalue(1);
+        inputNeurons[1].setYvalue(0);
+        break;
+      case 3:
+        /*
+        inputs    output
+        0   1     1
+        */
+        inputNeurons[0].setYvalue(0);
+        inputNeurons[1].setYvalue(1);
+      case 4:
+        /*
+        inputs    output
+        0   0     0
+        */
+        inputNeurons[0].setYvalue(0);
+        inputNeurons[1].setYvalue(0);
+    }
     // calculate Y for every hidden neuron
     for (int i = 0; i < numOfHiddenLayers; i++) {
       for (int j = 0; j < numOfHiddenNeurons; j++) {
