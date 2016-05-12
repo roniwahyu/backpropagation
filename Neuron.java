@@ -7,13 +7,13 @@ import java.lang.Math;
 
 public class Neuron {
   // Each Neuron has a theta value associated with it.
-  private float theta;
+  private double theta;
 
   // Each Neuron has synapses coming in and going out.
   // The number of vectors in is equal to the number of Neurons in the layer
   private int neuronsInLayer;
-  private float[] synapseIn;
-  private float[] synapseOut;
+  private double[] synapseIn;
+  private double[] synapseOut;
 
   // Each Neuron also has a Y value that is associated with it, it changes based on the iteration
   private double yvalue;
@@ -23,8 +23,8 @@ public class Neuron {
     yvalue = 0;
     theta = 0;
     neuronsInLayer = newNeuronsInLayer;
-    synapseIn = new float[neuronsInLayer];
-    synapseOut = new float[neuronsInLayer]; // used for input only at this time
+    synapseIn = new double[neuronsInLayer];
+    synapseOut = new double[neuronsInLayer]; // used for input only at this time
     for (int i = 0; i < neuronsInLayer; i++) {
       synapseIn[i] = 0;
       synapseOut[i] = 0;
@@ -37,7 +37,7 @@ public class Neuron {
   } // end helper
   public double calculateY(int iteration) { // NOTE THIS NOT FINISHED THIS IS ONLY FOR A SAMPLE ITERATION
     double x = 0;
-    for (int i = 0; i < synapseIn.length; i++) { // adding up (x)(w1) + (x)(w2) ... etc    
+    for (int i = 0; i < synapseIn.length; i++) { // adding up (x)(w1) + (x)(w2) ... etc
       x += (1) * synapseIn[i];
     } // end for
     x = x - ((1) * theta); // subtracting theta
@@ -74,7 +74,7 @@ public class Neuron {
   }
 
   // setter for theta
-  public void setTheta(float newTheta) {
+  public void setTheta(double newTheta) {
     theta = newTheta;
   } // end setTheta()
 
@@ -84,16 +84,16 @@ public class Neuron {
   } // end setNeuronsInLayer()
 
   // setter for the weights coming into the neuron
-  public void setSynapseIn(int index, float weight) {
+  public void setSynapseIn(int index, double weight) {
     synapseIn[index] = weight;
   }
 
   // setter for the weights that are leaving the neuron
-  public void setSynapseOut(int index, float weight) {
+  public void setSynapseOut(int index, double weight) {
     synapseOut[index] = weight;
   } // end setSynapseOut()
 
   // getter for theta
-  public float getTheta() {return theta;}
+  public double getTheta() {return theta;}
 
 } // end Neuron

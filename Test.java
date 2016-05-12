@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 /*
 this is a testing class for all my poopies
 
@@ -18,6 +19,10 @@ public class Test {
         }
       } while (true);
     } // end getAnInteger()
+
+    public static double randomWeight(Random r) {
+      return -1.2 + (1.2 - -1.2) * r.nextDouble();
+    }
 
   public static void main(String[] args) {
 
@@ -55,31 +60,37 @@ public class Test {
 
     // initializes the Neurons to match our assignment.
     // actually the weights and thresholds (?) need to be random.
-    // i will make them random after I am positive each calculation is correct.
-    inputNeurons[0].setSynapseOut(0, 0.5f);
-    inputNeurons[0].setSynapseOut(1, 0.9f); // Neuron 1 created.
+    // i will make them random after I am positive each calculation is correct
 
-    inputNeurons[1].setSynapseOut(0, 0.4f);
-    inputNeurons[1].setSynapseOut(1, 1.0f); // Neuron 2 created.
+    // make random weights
 
-    hiddenNeurons[0][0].setSynapseIn(0, 0.5f);
-    hiddenNeurons[0][0].setSynapseIn(1, 0.4f);
+    Random r = new Random();
+    System.out.println(randomWeight(r)); // debug test
+
+    inputNeurons[0].setSynapseOut(0, randomWeight(r));
+    inputNeurons[0].setSynapseOut(1, randomWeight(r)); // Neuron 1 created.
+
+    inputNeurons[1].setSynapseOut(0, randomWeight(r));
+    inputNeurons[1].setSynapseOut(1, randomWeight(r)); // Neuron 2 created.
+
+    hiddenNeurons[0][0].setSynapseIn(0, randomWeight(r));
+    hiddenNeurons[0][0].setSynapseIn(1, randomWeight(r));
     hiddenNeurons[0][0].setTheta(0.8f); // Neuron 3 created.
 
-    hiddenNeurons[0][1].setSynapseIn(0, 0.9f);
-    hiddenNeurons[0][1].setSynapseIn(1, 1.0f);
+    hiddenNeurons[0][1].setSynapseIn(0, randomWeight(r));
+    hiddenNeurons[0][1].setSynapseIn(1, randomWeight(r));
     hiddenNeurons[0][1].setTheta(-0.1f); // Neuron 4 created.
 
-    hiddenNeurons[1][0].setSynapseIn(0, 0.7f);
-    hiddenNeurons[1][0].setSynapseIn(1, -0.9f);
+    hiddenNeurons[1][0].setSynapseIn(0, randomWeight(r));
+    hiddenNeurons[1][0].setSynapseIn(1, randomWeight(r));
     hiddenNeurons[1][0].setTheta(-0.6f); // Neuron 5 created.
 
-    hiddenNeurons[1][1].setSynapseIn(0, 1.2f);
-    hiddenNeurons[1][1].setSynapseIn(1, -0.3f);
+    hiddenNeurons[1][1].setSynapseIn(0, randomWeight(r));
+    hiddenNeurons[1][1].setSynapseIn(1, randomWeight(r));
     hiddenNeurons[1][1].setTheta(-1.0f); // Neuron 6 created
 
-    outputNeurons[0].setSynapseIn(0, -1.2f);
-    outputNeurons[0].setSynapseIn(1, -1.1f);
+    outputNeurons[0].setSynapseIn(0, randomWeight(r));
+    outputNeurons[0].setSynapseIn(1, randomWeight(r));
     outputNeurons[0].setTheta(0.3f); // Neuron 7 created.
 
 
