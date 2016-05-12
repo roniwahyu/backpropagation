@@ -132,6 +132,7 @@ public class Test {
         */
         inputNeurons[0].setYvalue(0);
         inputNeurons[1].setYvalue(1);
+        break;
       case 4:
         /*
         inputs    output
@@ -139,11 +140,23 @@ public class Test {
         */
         inputNeurons[0].setYvalue(0);
         inputNeurons[1].setYvalue(0);
+        break;
+      default:
+        System.out.println("error looping through iterations");
     }
     // calculate Y for every hidden neuron
     for (int i = 0; i < numOfHiddenLayers; i++) {
       for (int j = 0; j < numOfHiddenNeurons; j++) {
         // if first hidden layer
+        if (i == 0) {
+          double input1 = inputNeurons[0].getYvalue();
+          double input2 = inputNeurons[1].getYvalue();
+          double w00 = inputNeurons[0].getSynapseOut(0);
+          double w01 = inputNeurons[1].getSynapseOut(0);
+          double w10 = inputNeurons[0].getSynapseOut(1);
+          double w11 = inputNeurons[1].getSynapseOut(1);
+          
+        }
           // for each neuron in this hidden layer
             // receive each input neuron
               // input neuron will have the INPUT and the WEIGHT corresponding to this current hidden neuron
