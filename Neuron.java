@@ -93,6 +93,11 @@ public class Neuron {
     synapseOut[index] = weight;
   } // end setSynapseOut()
 
+  // get the weight sent out from a neuron at an index
+  public double getSynapseOut(int index) {
+    return synapseOut[index];
+  } //end getSynapseOut()
+
   // getter for theta
   public double getTheta() {return theta;}
 

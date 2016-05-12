@@ -72,12 +72,12 @@ public class Test {
     inputNeurons[1].setSynapseOut(1, randomWeight(r));
      // Neuron 2 created
 
-    hiddenNeurons[0][0].setSynapseIn(0, randomWeight(r));
-    hiddenNeurons[0][0].setSynapseIn(1, randomWeight(r));
+    hiddenNeurons[0][0].setSynapseIn(0, inputNeurons[0].getSynapseOut(0)); // weight coming in is weight out of the input neurons
+    hiddenNeurons[0][0].setSynapseIn(1, inputNeurons[1].getSynapseOut(0));
     hiddenNeurons[0][0].setTheta(randomTheta(r)); // Neuron 3 created.
 
-    hiddenNeurons[0][1].setSynapseIn(0, randomWeight(r));
-    hiddenNeurons[0][1].setSynapseIn(1, randomWeight(r));
+    hiddenNeurons[0][1].setSynapseIn(0, inputNeurons[0].getSynapseOut(1)); // weight coming in is weight out of input neurons
+    hiddenNeurons[0][1].setSynapseIn(1, inputNeurons[1].getSynapseOut(1));
     hiddenNeurons[0][1].setTheta(randomTheta(r)); // Neuron 4 created.
 
     hiddenNeurons[1][0].setSynapseIn(0, randomWeight(r));
