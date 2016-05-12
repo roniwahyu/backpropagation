@@ -64,33 +64,47 @@ public class Test {
     System.out.println("DEBUG: Random theta: " + randomTheta(r));
 
     // setting up the first iteration
+
+    // first neuron of input layer
     inputNeurons[0].setSynapseOut(0, randomWeight(r));
     inputNeurons[0].setSynapseOut(1, randomWeight(r));
-     // Neuron 1 created.
 
+    // second neuron of input layer
     inputNeurons[1].setSynapseOut(0, randomWeight(r));
     inputNeurons[1].setSynapseOut(1, randomWeight(r));
-     // Neuron 2 created
 
+    // FIRST HIDDEN LAYER
+    // first neuron of first hidden layer
     hiddenNeurons[0][0].setSynapseIn(0, inputNeurons[0].getSynapseOut(0)); // weight coming in is weight out of the input neurons
     hiddenNeurons[0][0].setSynapseIn(1, inputNeurons[1].getSynapseOut(0));
-    hiddenNeurons[0][0].setTheta(randomTheta(r)); // Neuron 3 created.
+    hiddenNeurons[0][0].setSynapseOut(0, randomWeight(r)); // set weight out to random
+    hiddenNeurons[0][0].setSynapseOut(1, randomWeight(r));
+    hiddenNeurons[0][0].setTheta(randomTheta(r));
 
+    // second neuron of first hidden layer
     hiddenNeurons[0][1].setSynapseIn(0, inputNeurons[0].getSynapseOut(1)); // weight coming in is weight out of input neurons
     hiddenNeurons[0][1].setSynapseIn(1, inputNeurons[1].getSynapseOut(1));
-    hiddenNeurons[0][1].setTheta(randomTheta(r)); // Neuron 4 created.
+    hiddenNeurons[0][1].setSynapseOut(0, randomWeight(r)); // set weight out to random
+    hiddenNeurons[0][1].setSynapseOut(1, randomWeight(r));
+    hiddenNeurons[0][1].setTheta(randomTheta(r));
 
-    hiddenNeurons[1][0].setSynapseIn(0, randomWeight(r));
-    hiddenNeurons[1][0].setSynapseIn(1, randomWeight(r));
-    hiddenNeurons[1][0].setTheta(randomTheta(r)); // Neuron 5 created.
+    // SECOND HIDDEN LAYER
+    // first neuron of second hidden layer
+    hiddenNeurons[1][0].setSynapseIn(0, hiddenNeurons[0][0].getSynapseOut(0));
+    hiddenNeurons[1][0].setSynapseIn(1, hiddenNeurons[0][1].getSynapseOut(0));
+    hiddenNeurons[1][0].setSynapseOut(0, randomWeight(r)); // only one synapse out, because only one output neuron
+    hiddenNeurons[1][0].setTheta(randomTheta(r));
 
-    hiddenNeurons[1][1].setSynapseIn(0, randomWeight(r));
-    hiddenNeurons[1][1].setSynapseIn(1, randomWeight(r));
-    hiddenNeurons[1][1].setTheta(randomTheta(r)); // Neuron 6 created
+    // second neuron of second hidden layer
+    hiddenNeurons[1][1].setSynapseIn(0, hiddenNeurons[0][0].getSynapseOut(1));
+    hiddenNeurons[1][1].setSynapseIn(1, hiddenNeurons[0][1].getSynapseOut(1));
+    hiddenNeurons[1][1].setSynapseOut(0, randomWeight(r)); // only one synapse out, because only one output neuron
+    hiddenNeurons[1][1].setTheta(randomTheta(r));
 
-    outputNeurons[0].setSynapseIn(0, randomWeight(r));
-    outputNeurons[0].setSynapseIn(1, randomWeight(r));
-    outputNeurons[0].setTheta(randomTheta(r)); // Neuron 7 created.
+    // only neuron of output layer
+    outputNeurons[0].setSynapseIn(0, hiddenNeurons[1][0].getSynapseOut(0));
+    outputNeurons[0].setSynapseIn(1, hiddenNeurons[1][1].getSynapseOut(0));
+    outputNeurons[0].setTheta(randomTheta(r));
 
     // now setting up iterations
     int iteration = 1;
