@@ -47,6 +47,9 @@ public class Neuron {
   public void setYvalue(double y) {
     yvalue = y; //-------------------------------maybe just make this ^^^^^^^^
   }
+  public double getYvalue() {
+    return yvalue;
+  }
 
   // calculate the error for neurons in output layer
   public double calcOutputError(int iteration) {
