@@ -35,17 +35,14 @@ public class Neuron {
   private double sigmoid(double x) {
     return ( 1 / ( 1 + Math.pow(Math.E, (-1*x))));
   } // end helper
-  public double calculateY(int iteration) { // NOTE THIS NOT FINISHED THIS IS ONLY FOR A SAMPLE ITERATION
+  public double calculateY(double input1, double w1, double input2, double w2, double theta) { // NOTE THIS NOT FINISHED THIS IS ONLY FOR A SAMPLE ITERATION
     double x = 0;
-    for (int i = 0; i < synapseIn.length; i++) { // adding up (x)(w1) + (x)(w2) ... etc
-      x += (1) * synapseIn[i];
-    } // end for
-    x = x - ((1) * theta); // subtracting theta
+    x = ((input1*w1) + (input2*w2) - theta);
     x = sigmoid(x); // pass this to sigmoid
     return x;
   } // end calculateY()
   public void setYvalue(double y) {
-    yvalue = y; //-------------------------------maybe just make this ^^^^^^^^
+    yvalue = y;
   }
   public double getYvalue() {
     return yvalue;
