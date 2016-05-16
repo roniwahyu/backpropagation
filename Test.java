@@ -145,6 +145,13 @@ public class Test {
         System.out.println("error looping through iterations");
     }
 
+    // attempt 1, initializing all hidden neuron's y values
+    for (int i = 0; i < 2; i++) {
+      // current input for current iteration
+      double input1 = inputNeurons[0].getYvalue(); // initial input from table
+      double input2 = inputNeurons[1].getYvalue(); // inititial input from table
+      
+    }
     // first hidden layer
 
     // current input for current iteration
@@ -155,7 +162,7 @@ public class Test {
     double w00 = inputNeurons[0].getSynapseOut(0); // input1's weight to this neuron
     double w10 = inputNeurons[1].getSynapseOut(0); // input2's weight to this neuron
 
-    // calculate y for the first hidden neuron
+    // calculate y for the first hidden neuron and sets it
     hiddenNeurons[0][0].setYvalue(hiddenNeurons[0][0].calculateY(input1, w00, input2, w10, hiddenNeurons[0][0].getTheta()));
 
     // for second neuron in hidden
@@ -164,7 +171,9 @@ public class Test {
 
     // calculate y for the second hidden neuron
     hiddenNeurons[0][1].setYvalue(hiddenNeurons[0][1].calculateY(input1, w01, input2, w11, hiddenNeurons[0][1].getTheta()));
-    
+
+
+
     /*
     // calculate Y for every hidden neuron
     for (int i = 0; i < numOfHiddenLayers; i++) {
