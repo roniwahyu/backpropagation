@@ -278,8 +278,45 @@ public class Test {
     deltaThetas[1] = alpha * (-1) * hiddenNeurons[0][0].getGradient();
     deltaThetas[0] = alpha * (-1) * hiddenNeurons[0][1].getGradient();
 
+    // update all the weights
+    double weight;
 
-    
+    //changing weights back to front to fit the theme
+    //weights to output
+    weight = hiddenNeurons[1][0].getSynapseOut(0) + deltaThetas[9];
+    hiddenNeurons[1][0].setSynapseOut(0, weight);
+    weight = hiddenNeurons[1][1].getSynapseOut(0) + deltaThetas[8];
+    hiddenNeurons[1][1].setSynapseOut(0, weight);
+    // weights to second hidden layer
+    // first neuron
+    weight = hiddenNeurons[0][0].getSynapseOut(0) + deltaThetas[7];
+    hiddenNeurons[0][0].setSynapseOut(0, weight);
+    weight = hiddenNeurons[0][1].getSynapseOut(0) + deltaThetas[6];
+    hiddenNeurons[0][1].setSynapseOut(0, weight);
+    // second neuron
+    weight = hiddenNeurons[0][0].getSynapseOut(1) + deltaThetas[5];
+    hiddenNeurons[0][0].setSynapseOut(1, weight);
+    weight = hiddenNeurons[0][1].getSynapseOut(0) + deltaThetas[4];
+    hiddenNeurons[0][1].setSynapseOut(1, weight);
+    // first hidden layer
+    // first neuron
+    weight = inputNeurons[0].getSynapseOut(0) + deltaThetas[3];
+    inputNeurons[0].setSynapseOut(0, weight);
+    weight = inputNeurons[1].getSynapseOut(0) + deltaThetas[2];
+    inputNeurons[1].setSynapseOut(0, weight);
+    // second neuron
+    weight = inputNeurons[0].getSynapseOut(0) + deltaThetas[1];
+
+
+
+
+
+
+
+
+
+
+
     System.out.println("***********************************************"); // just for viewing in console easier
     // print all input neurons
     System.out.println("INPUT NEURONS");
