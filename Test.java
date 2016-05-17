@@ -145,15 +145,9 @@ public class Test {
         System.out.println("error looping through iterations");
     }
 
-    // attempt 1, initializing all hidden neuron's y values
-    for (int i = 0; i < 2; i++) {
-      // current input for current iteration
-      double input1 = inputNeurons[0].getYvalue(); // initial input from table
-      double input2 = inputNeurons[1].getYvalue(); // inititial input from table
-      
-    }
-    // first hidden layer
 
+
+    // first hidden layer
     // current input for current iteration
     double input1 = inputNeurons[0].getYvalue(); // initial input from table
     double input2 = inputNeurons[1].getYvalue(); // inititial input from table
@@ -171,6 +165,37 @@ public class Test {
 
     // calculate y for the second hidden neuron
     hiddenNeurons[0][1].setYvalue(hiddenNeurons[0][1].calculateY(input1, w01, input2, w11, hiddenNeurons[0][1].getTheta()));
+
+
+    // second layer
+    input1 = hiddenNeurons[0][0].getYvalue(); // "input" is just used again
+    input2 = hiddenNeurons[0][1].getYvalue(); // even though the name is misleading, it's obvious what it is
+
+    // for first neuron in second hidden
+    // weight variables
+    w00 = hiddenNeurons[0][0].getSynapseOut(0);
+    w10 = hiddenNeurons[0][1].getSynapseOut(0);
+    // activation function
+    hiddenNeurons[1][0].setYvalue(hiddenNeurons[1][0].calculateY(input1, w00, input2, w10, hiddenNeurons[1][0].getTheta()));
+
+    // for the second neuron in second hidden
+    // weight variables again
+    w01 = hiddenNeurons[0][0].getSynapseOut(1);
+    w11 = hiddenNeurons[0][1].getSynapseOut(1);
+    // activation funciton
+    hiddenNeurons[1][1].setYvalue(hiddenNeurons[1][1].calculateY(input1, w01, input2, w11, hiddenNeurons[1][1].getTheta()));
+
+    // output layer only one neuron
+    input1 = hiddenNeurons[1][0].getYvalue(); // "input" is just used again
+    input2 = hiddenNeurons[1][1].getYvalue(); // even though the name is misleading, it's obvious what it is
+    // weight variables
+    w00 = hiddenNeurons[1][0].getSynapseOut(0);
+    w10 = hiddenNeurons[1][1].getSynapseOut(0);
+    // activation function
+    outputNeurons[0].setYvalue(outputNeurons[0].calculateY(input1, w00, input2, w10, outputNeurons[0].getTheta()));
+
+    // all y's are calculated
+
 
 
 
