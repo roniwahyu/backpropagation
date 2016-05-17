@@ -30,6 +30,9 @@ public class Test {
 
   public static void main(String[] args) {
 
+    // rate of learning
+    double alpha = 0.1;
+
     // information for building network
     int numOfInputNeurons = 2;
     int numOfOutputNeurons = 1;
@@ -152,46 +155,36 @@ public class Test {
         System.out.println("error looping through iterations");
     }
 
-
-
+    // ---------------------------ACTIVATION FUNCTIONS-------------------------------------------------
     // first hidden layer
     // current input for current iteration
     double input1 = inputNeurons[0].getYvalue(); // initial input from table
-    double input2 = inputNeurons[1].getYvalue(); // inititial input from table
-
+    double input2 = inputNeurons[1].getYvalue(); // inititial input from
     // for first neuron in hidden
     double w00 = inputNeurons[0].getSynapseOut(0); // input1's weight to this neuron
-    double w10 = inputNeurons[1].getSynapseOut(0); // input2's weight to this neuron
-
+    double w10 = inputNeurons[1].getSynapseOut(0); // input2's weight to this
     // calculate y for the first hidden neuron and sets it
     hiddenNeurons[0][0].setYvalue(hiddenNeurons[0][0].calculateY(input1, w00, input2, w10, hiddenNeurons[0][0].getTheta()));
-
     // for second neuron in hidden
     double w01 = inputNeurons[0].getSynapseOut(1); // input1's weight to this neuron
-    double w11 = inputNeurons[1].getSynapseOut(1); // input2's weight to this neuron
-
+    double w11 = inputNeurons[1].getSynapseOut(1); // input2's weight to this
     // calculate y for the second hidden neuron
     hiddenNeurons[0][1].setYvalue(hiddenNeurons[0][1].calculateY(input1, w01, input2, w11, hiddenNeurons[0][1].getTheta()));
-
-
     // second layer
     input1 = hiddenNeurons[0][0].getYvalue(); // "input" is just used again
-    input2 = hiddenNeurons[0][1].getYvalue(); // even though the name is misleading, it's obvious what it is
-
+    input2 = hiddenNeurons[0][1].getYvalue(); // even though the name is misleading, it's obvious what it
     // for first neuron in second hidden
     // weight variables
     w00 = hiddenNeurons[0][0].getSynapseOut(0);
     w10 = hiddenNeurons[0][1].getSynapseOut(0);
     // activation function
     hiddenNeurons[1][0].setYvalue(hiddenNeurons[1][0].calculateY(input1, w00, input2, w10, hiddenNeurons[1][0].getTheta()));
-
     // for the second neuron in second hidden
     // weight variables again
     w01 = hiddenNeurons[0][0].getSynapseOut(1);
     w11 = hiddenNeurons[0][1].getSynapseOut(1);
     // activation funciton
     hiddenNeurons[1][1].setYvalue(hiddenNeurons[1][1].calculateY(input1, w01, input2, w11, hiddenNeurons[1][1].getTheta()));
-
     // output layer only one neuron
     input1 = hiddenNeurons[1][0].getYvalue(); // "input" is just used again
     input2 = hiddenNeurons[1][1].getYvalue(); // even though the name is misleading, it's obvious what it is
@@ -201,9 +194,76 @@ public class Test {
     // activation function
     outputNeurons[0].setYvalue(outputNeurons[0].calculateY(input1, w00, input2, w10, outputNeurons[0].getTheta()));
 
-    // all y's are calculated
+
+    // ---------------------------------CALCULATE OUTPUT ERROR-----------------------------------------------------
+    // calculated the error as Desired - Actual
     outputError = desiredOutput - outputNeurons[0].getYvalue();
     System.out.println("DEBUG: outputError = " + outputError);
+
+
+
+    /*
+
+    Now we go backwards
+
+    */
+
+
+
+    //------------------------------------DETERMINE CHANGES IN WEIGHTS----------------------------------------------------
+    double gradient;
+    double yval;
+
+    // calculate gradient
+    // gradient of outputNeuron[0] is Yvalue(1-Yvalue)outputError
+    // calculate gradient of outputNeuron[0]
+    yval = outputNeurons[0].getYvalue();
+    gradient = yval * (1 - yval) * outputError;
+    outputNeurons[0].setGradient(gradient);
+    // calculate gradients of second hidden layer
+    // first neuron
+    yval = hiddenNeurons[1][0].getYvalue();
+    gradient = yval * (1 - yval) * outputNeurons[0].getGradient() * hiddenNeurons[1][0].getSynapseOut(0);
+    hiddenNeurons[1][0].setGradient(gradient);
+    // second neuron
+    yval = hiddenNeurons[1][1].getYvalue();
+    gradient = yval * (1 - yval) * outputNeurons[0].getGradient() * hiddenNeurons[1][1].getSynapseOut(0);
+    hiddenNeurons[1][1].setGradient(gradient);
+    // calculate gradients of first hidden layer
+    // first neuron
+    yval = hiddenNeurons[0][0].getYvalue();
+    gradient = (yval * (1 - yval)) * hiddenNeurons[1][0].getGradient() * hiddenNeurons[0][0].getSynapseOut(0) * hiddenNeurons[1][1].getGradient() * hiddenNeurons[0][0].getSynapseOut(1);
+    hiddenNeurons[0][0].setGradient(gradient);
+    // second neuron
+    yval = hiddenNeurons[0][1].getYvalue();
+    gradient = (yval * (1 - yval)) * hiddenNeurons[1][0].getGradient() * hiddenNeurons[0][1].getSynapseOut(0) * hiddenNeurons[1][1].getGradient() * hiddenNeurons[0][1].getSynapseOut(1);
+    hiddenNeurons[0][1].setGradient(gradient);
+
+
+
+
+
+
+
+    // second hidden layer weights to output
+    double[] deltaWeights = new double[10]; // represents the change in weights
+
+    // calculate deltas
+
+    // this array is confusing and unintuitive
+    // deltaWeights[] holds all the deltas so we can update them later on
+    // we have to be very careful about the order of this because deltaWeights[9] does not intuitively represent any specific weight.
+
+    // weights going to outputNeuron[0]
+    deltaWeights[9] = alpha * hiddenNeurons[1][0].getYvalue() * outputNeurons[0].getGradient();
+    deltaWeights[8] = alpha * hiddenNeurons[1][1].getYvalue() * outputNeurons[0].getGradient();
+    // weights going to hiddenNeurons[1][0]
+    deltaWeights[7] = alpha * hiddenNeurons[0][0].getYvalue() * hiddenNeurons[1][0].getGradient();
+    deltaWeights[6] = alpha * hiddenNeurons[0][1].getYvalue() * hiddenNeurons[1][0].getGradient();
+    // weights going to hiddenNeurons[1][1]
+    deltaWeights[5] = alpha * hiddenNeurons[0][0].getYvalue() * hiddenNeurons[1][1].getGradient();
+    deltaWeights[4] = alpha * hiddenNeurons[0][1].getYvalue() * hiddenNeurons[1][1].getGradient();
+
 
 
 
