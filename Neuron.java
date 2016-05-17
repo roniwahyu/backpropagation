@@ -18,6 +18,8 @@ public class Neuron {
   // Each Neuron also has a Y value that is associated with it, it changes based on the iteration
   private double yvalue;
 
+  private double gradient;
+
   // constructor -- initializes every member variable to default values
   public Neuron(int newNeuronsInLayer) {
     yvalue = 0;
@@ -29,8 +31,13 @@ public class Neuron {
       synapseIn[i] = 0;
       synapseOut[i] = 0;
     }
+    gradient = 0;
   } // end constructor
 
+  public void setGradient(double newGradient) {
+    gradient = newGradient;
+  }
+  public double getGradient() { return gradient; }
   //helper sigmoid
   private double sigmoid(double x) {
     return ( 1 / ( 1 + Math.pow(Math.E, (-1*x))));
@@ -47,20 +54,6 @@ public class Neuron {
   public double getYvalue() {
     return yvalue;
   }
-
-  // calculate the error for neurons in output layer
-  public double calcOutputError(int iteration) {
-    // hello
-    int desire;
-    switch (iteration) {
-      case 1: desire = 0;
-      case 2: desire = 1;
-      case 3: desire = 1;
-      case 4: desire = 0;
-      default: desire = 100; // just because it'll fuck with your head so bad
-    } //end switch
-    return (desire - yvalue);
-  } //end calcOutputError()
 
   // simple toString for ya
   public String toString() {
