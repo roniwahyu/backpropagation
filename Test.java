@@ -263,10 +263,23 @@ public class Test {
     // weights going to hiddenNeurons[1][1]
     deltaWeights[5] = alpha * hiddenNeurons[0][0].getYvalue() * hiddenNeurons[1][1].getGradient();
     deltaWeights[4] = alpha * hiddenNeurons[0][1].getYvalue() * hiddenNeurons[1][1].getGradient();
+    // weights going to hiddenNeurons[0][0]
+    deltaWeights[3] = alpha * inputNeurons[0].getYvalue() * hiddenNeurons[0][0].getGradient();
+    deltaWeights[2] = alpha * inputNeurons[1].getYvalue() * hiddenNeurons[0][0].getGradient();
+    // weights going to hiddenNeurons[0][1]
+    deltaWeights[1] = alpha * inputNeurons[0].getYvalue() * hiddenNeurons[0][1].getGradient();
+    deltaWeights[0] = alpha * inputNeurons[1].getYvalue() * hiddenNeurons[0][1].getGradient();
+
+    // now to do delta thetas!
+    double deltaThetas[] = new double[5];
+    deltaThetas[4] = alpha * (-1) * outputNeurons[0].getGradient();
+    deltaThetas[3] = alpha * (-1) * hiddenNeurons[1][0].getGradient();
+    deltaThetas[2] = alpha * (-1) * hiddenNeurons[1][1].getGradient();
+    deltaThetas[1] = alpha * (-1) * hiddenNeurons[0][0].getGradient();
+    deltaThetas[0] = alpha * (-1) * hiddenNeurons[0][1].getGradient();
 
 
-
-
+    
     System.out.println("***********************************************"); // just for viewing in console easier
     // print all input neurons
     System.out.println("INPUT NEURONS");
