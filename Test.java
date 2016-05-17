@@ -305,16 +305,20 @@ public class Test {
     weight = inputNeurons[1].getSynapseOut(0) + deltaThetas[2];
     inputNeurons[1].setSynapseOut(0, weight);
     // second neuron
-    weight = inputNeurons[0].getSynapseOut(0) + deltaThetas[1];
+    weight = inputNeurons[0].getSynapseOut(1) + deltaThetas[1];
+    inputNeurons[0].setSynapseOut(1, weight);
+    weight = inputNeurons[1].getSynapseOut(1) + deltaThetas[0];
+    inputNeurons[1].setSynapseOut(1, weight);
+    // end updating weights
 
+    // updating thetas
+    outputNeurons[0].setTheta(outputNeurons[0].getTheta() + deltaThetas[4]);
+    hiddenNeurons[1][0].setTheta(hiddenNeurons[1][0].getTheta() + deltaThetas[3]);
+    hiddenNeurons[1][1].setTheta(hiddenNeurons[1][1].getTheta() + deltaThetas[2]);
+    hiddenNeurons[0][0].setTheta(hiddenNeurons[0][0].getTheta() + deltaThetas[1]);
+    hiddenNeurons[0][1].setTheta(hiddenNeurons[0][1].getTheta() + deltaThetas[0]);
 
-
-
-
-
-
-
-
+    //done, iterate through again.
 
 
     System.out.println("***********************************************"); // just for viewing in console easier
