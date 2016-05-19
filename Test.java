@@ -335,8 +335,9 @@ public class Test {
       }
 
 
-      if (loopcount % 200000  == 0) {
-        System.out.println("***********************************************"); // just for viewing in console easier
+      if (epoch % 10000 == 0) {
+
+        System.out.println("*********************************" + epoch); // just for viewing in console easier
         // print all input neurons
         System.out.println("INPUT NEURONS");
         for (int i = 0; i < numOfInputNeurons; i++) {
@@ -363,6 +364,7 @@ public class Test {
     } while (sumSquaredError > 0.01); // end while loop
 
 
+    /*
     System.out.println("***********************************************"); // just for viewing in console easier
     // print all input neurons
     System.out.println("INPUT NEURONS");
@@ -384,6 +386,8 @@ public class Test {
     for (int i = 0; i < numOfOutputNeurons; i++) {
       System.out.println("Neuron " + (i+1) + " in layer. " + outputNeurons[i]);
     } // end for
+
+    */
 
   } // end main()
 } // end Test
