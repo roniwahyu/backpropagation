@@ -119,7 +119,8 @@ public class Test {
 
     double sumSquaredError = 0;
     int iteration = 1;
-    int loopcount = 0;
+    int loopcount = 1;
+    int epoch = 0;
     // loop begins.
     do {
 
@@ -214,7 +215,7 @@ public class Test {
       // ---------------------------------CALCULATE OUTPUT ERROR-----------------------------------------------------
       // calculated the error as Desired - Actual
       outputError = desiredOutput - outputNeurons[0].getYvalue();
-      sumSquaredError = sumSquaredError + (outputError * outputError);
+      sumSquaredError = (outputError * outputError);
       //System.out.println("DEBUG: sum of squared errors = " + sumSquaredError);
 
 
@@ -329,12 +330,37 @@ public class Test {
       iteration++;
       loopcount++;
 
-      if (loopcount % 500000  == 0) {
-        System.out.println(sumSquaredError);
+      if (loopcount % 4 == 0) {
+        epoch++;
+      }
+
+
+      if (loopcount % 200000  == 0) {
+        System.out.println("***********************************************"); // just for viewing in console easier
+        // print all input neurons
+        System.out.println("INPUT NEURONS");
+        for (int i = 0; i < numOfInputNeurons; i++) {
+          System.out.println("Neuron " + (i+1) + " in layer. " + inputNeurons[i]); // literally useless. only thing they have is weight outs
+        } // end for
+
+        // print all the hidden neurons
+        System.out.println("HIDDEN NEURONS");
+        for (int i = 0; i < numOfHiddenLayers; i++) {
+          System.out.println("HIDDEN LAYER: " + (i+1));
+          for (int j = 0; j < numOfHiddenNeurons; j++) {
+            System.out.println("Neuron " + (j+1) + " in layer. " + hiddenNeurons[i][j]);
+          } // end for
+        }// end for
+
+        // print all output neurons
+        System.out.println("OUTPUT NEURONS");
+        for (int i = 0; i < numOfOutputNeurons; i++) {
+          System.out.println("Neuron " + (i+1) + " in layer. " + outputNeurons[i]);
+        } // end for
       } // end if
 
 
-    } while (sumSquaredError > 0.001); // end while loop
+    } while (sumSquaredError > 0.01); // end while loop
 
 
     System.out.println("***********************************************"); // just for viewing in console easier
